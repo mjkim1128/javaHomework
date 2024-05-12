@@ -1,5 +1,5 @@
 import java.util.Random;
-public class RandumUtils{
+public class RandomUtils{
     public static BlockType randomBlockType(){
         int randBlockNum = new Random().nextInt(7) + 1;
         switch (randBlockNum) {

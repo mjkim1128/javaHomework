@@ -2,10 +2,13 @@ import java.awt.geom.Rectangle2D;
 
 public class RedBlock extends Block{
 
-    private double BLOCK_WIDTH = 50;
-    public RedBlock(BlockType type, Rectangle2D [] rectangles){
-        super();
+    
+    public RedBlock(double x, double y){
+        super(x,y);
+        init(x,y);
+        type = BlockType.RED_BLOCK;
     }
+
     @Override
     public void init(double x, double y) { // RedBlock init 내부구현
         rectangles[0] = new Rectangle2D.Double(x, y, BLOCK_WIDTH, BLOCK_WIDTH);

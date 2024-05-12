@@ -3,6 +3,7 @@ import java.awt.Graphics2D;
 import java.awt.Color;
 
 public abstract class Block implements IMovealbe, IColliding{
+    protected double BLOCK_WIDTH = 50;
     protected BlockType type;
     protected Rectangle2D[] rectangles = new Rectangle2D[4];
     protected Block(double x, double y) { 
@@ -11,8 +12,12 @@ public abstract class Block implements IMovealbe, IColliding{
 
     public abstract void init(double x, double y);
 
-    public void translate(int x, int y){
-        
+    public void translate(int dx, int dy){
+        for (int i=0; i<4; i++) {
+        double newX = rectangles[i].getX() + dx;
+        double newY = rectangles[i].getY() + dy;
+        rectangles[i].setFrame(newX, newY, BLOCK_WIDTH, BLOCK_WIDTH);
+        }
     }
 
     public void collideWith(Block other){
