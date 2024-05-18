@@ -49,7 +49,7 @@ public class Lab4MainFrame extends JFrame implements KeyListener {
 		} else if (e.getKeyCode() == KeyEvent.VK_4) {
 			selectedIndex = 3;
 		}
-		//blockManager.checkBelowBottomLine(); // blockManager checkBelowBottomLine
+		blockManager.checkBelowBottomLine(); // blockManager checkBelowBottomLine
 		blockManager.collide(); // blockManager check collide
 		displayPanel.revalidate(); // repaint
 		displayPanel.repaint(); // repaint

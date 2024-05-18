@@ -37,14 +37,16 @@ class BlockManager extends JPanel implements ActionListener {
     }
 
     // below bottom line
-    /*public void checkBelowBottomLine() {
+    public boolean checkBelowBottomLine() {
         for (Block block : blocks) {
             if (block.isBelow(0.0, 600.0, 600.0, 600.00)) {
                 System.out.println(block.getType() + " is below bottomLine");
                 block = null;
+                return false;
             }
         }
-    }*/
+        return true;
+    }
 
     // collide
     public boolean collide() {
@@ -53,13 +55,11 @@ class BlockManager extends JPanel implements ActionListener {
                 if (block != otherBlock && block.collideWith(otherBlock)) {
                     System.out.println(block.getType() + " collide with " + otherBlock.getType());
                     System.out.println();
-                    collideCheck = true;
-                } else {
-                    collideCheck = false;
+                    return true;
                 }
             }
         }
-        return collideCheck;
+        return false;
     }
 
     // paint
@@ -68,7 +68,7 @@ class BlockManager extends JPanel implements ActionListener {
         super.paintComponent(g); // JPanel paintComponent
         Graphics2D g2 = (Graphics2D) g;
         for (var block : blocks) { // RED_BLOCK, TEAL_BLOCK, DOGERS_BLUE_BLOCK, RANDOM_BLOCK    
-            System.out.println(block.toString());
+           // System.out.println(block.toString());
             if (block != null) block.draw(g2);
         }
     }    
@@ -79,9 +79,10 @@ class BlockManager extends JPanel implements ActionListener {
         for (int i = 0; i< blocks.length; i++) {           
             translate(i, RandomUtils.randomInt(-1, 2), RandomUtils.randomInt(1, 5));
         }
-        //checkBelowBottomLine(); // check below Bottom Line
-        collide(); // check collide
-        if(collideCheck == true){
+        if(checkBelowBottomLine()){
+            stop();
+        } // check below Bottom Line
+        if(collide()){
             stop();
         }
         repaint(); // repaint
@@ -97,6 +98,7 @@ class BlockManager extends JPanel implements ActionListener {
 
     // timer stop
 	public void stop() {
+        System.out.println("stop()");
         timer.stop();
 	}
 }
