@@ -1,3 +1,3 @@
 public interface IMovealbe {
-    void translate(int x, int y);
+    void translate(double dx, double dy);
 }

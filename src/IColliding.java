@@ -1,3 +1,3 @@
 public interface IColliding {
-    void collideWith(Block other);
+    boolean collideWith(Block other);
 }
