@@ -13,7 +13,7 @@ public class Lab4MainFrame extends JFrame implements KeyListener {
 	public Lab4MainFrame(String title) {
 		super(title);
 		blockManager = new BlockManager();
-		//blockManager.start(); // blockManager timer start
+		blockManager.start(); // blockManager timer start
 		displayPanel = new JPanel(new BorderLayout());
 		displayPanel.add(blockManager, BorderLayout.CENTER);
 		displayPanel.addKeyListener(this); // KeyListener
@@ -61,5 +61,6 @@ public class Lab4MainFrame extends JFrame implements KeyListener {
 
     public static void main(String[] args) {
         new Lab4MainFrame("Block");
+
     }
 }

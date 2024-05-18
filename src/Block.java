@@ -6,7 +6,7 @@ import java.util.Random;
 public abstract class Block implements IMovealbe, IColliding{
     protected double BLOCK_WIDTH = 50;
     protected BlockType type;
-    protected static Rectangle2D[] rectangles = new Rectangle2D[4];
+    protected Rectangle2D[] rectangles = new Rectangle2D[4];
     protected Block(double x, double y) { 
         init(x, y); 
     }
@@ -14,9 +14,9 @@ public abstract class Block implements IMovealbe, IColliding{
     public abstract void init(double x, double y);
 
     public void translate(double dx, double dy){
+        double randDx = new Random().nextDouble(50) -25;
+        double randDy = new Random().nextDouble(50) -25;
         for (int i=0; i<4; i++) {
-        double randDx = new Random().nextDouble(500);
-        double randDy = new Random().nextDouble(500);
         double newX = rectangles[i].getX() + randDx;
         double newY = rectangles[i].getY() + randDy;
         rectangles[i].setFrame(newX, newY, BLOCK_WIDTH, BLOCK_WIDTH);
@@ -25,7 +25,7 @@ public abstract class Block implements IMovealbe, IColliding{
     
     public boolean collideWith(Block other){
         for (Rectangle2D rect1 : rectangles) {
-            for (Rectangle2D rect2 : Block.rectangles) {
+            for (Rectangle2D rect2 : rectangles) {
                 if (rect1.intersects(rect2)) {
                     return true; // 첫 번째 겹치는 부분을 찾았으므로 바로 종료
                 }

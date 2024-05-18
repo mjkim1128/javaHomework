@@ -10,17 +10,17 @@ class BlockManager extends JPanel implements ActionListener {
     private Timer timer = null;
     private final static int DELAY = 500; // 500 msec delay   
     Block[] blocks = new Block[4];
-
+    public boolean collideCheck = false ;
     public BlockManager() {
         timer = new Timer(DELAY, this); // timer ActionListener event (500ms DELAY)
         this.setDoubleBuffered(true);
         blocks[0] = BlockFactory.getInstance(BlockType.RED_BLOCK, 50.0, 0.0);
         System.out.println(blocks[0].toString());
         
-        blocks[1] = BlockFactory.getInstance(BlockType.TEAL_BLOCK, 180.0, 10);
+        blocks[1] = BlockFactory.getInstance(BlockType.TEAL_BLOCK, 180.0, 50);
         System.out.println(blocks[1].toString());
 
-        blocks[2] = BlockFactory.getInstance(BlockType.DOGERS_BLUE_BLOCK, 70.0, 170.0);
+        blocks[2] = BlockFactory.getInstance(BlockType.DOGERS_BLUE_BLOCK, 100.0, 300.0);
         System.out.println(blocks[2].toString());
         
         blocks[3] = BlockFactory.getInstance(RandomUtils.randomBlockType(), RandomUtils.randomDouble(200.0,400.0), RandomUtils.randomDouble(20.0,40.0));
@@ -47,15 +47,19 @@ class BlockManager extends JPanel implements ActionListener {
     }*/
 
     // collide
-    public void collide() {
+    public boolean collide() {
         for (Block block : blocks) {
             for (Block otherBlock : blocks) {
                 if (block != otherBlock && block.collideWith(otherBlock)) {
                     System.out.println(block.getType() + " collide with " + otherBlock.getType());
                     System.out.println();
-                } 
+                    collideCheck = true;
+                } else {
+                    collideCheck = false;
+                }
             }
         }
+        return collideCheck;
     }
 
     // paint
@@ -77,6 +81,9 @@ class BlockManager extends JPanel implements ActionListener {
         }
         //checkBelowBottomLine(); // check below Bottom Line
         collide(); // check collide
+        if(collideCheck == true){
+            stop();
+        }
         repaint(); // repaint
     }
 
